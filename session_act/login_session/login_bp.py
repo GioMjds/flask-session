@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session, flash
+from flask import Blueprint, render_template, request, redirect, url_for, session, flash, make_response
 
 login = Blueprint('login', __name__, template_folder='templates')
 
@@ -16,9 +16,13 @@ def index():
         else:
             flash('Invalid username or password', 'error')
 
-    return render_template('login.html')
+    response = make_response(render_template('login.html'))
+    response.headers['Cache-Control'] = 'no-store'
+    return response
 
 @login.route('/logout')
 def logout():
     session.pop('username', None)
-    return redirect(url_for('login.index'))
+    response = make_response(redirect(url_for('login.index')))
+    response.headers['Cache-Control'] = 'no-store'
+    return response
