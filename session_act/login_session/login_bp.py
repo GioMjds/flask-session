@@ -6,7 +6,7 @@ login = Blueprint('login', __name__, template_folder='templates')
 def index():
     if 'username' in session:
         return redirect(url_for('dashboard.index'))
-    
+
     if request.method == "POST":
         username = request.form['username']
         password = request.form['password']
