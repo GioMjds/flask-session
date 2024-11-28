@@ -1,4 +1,3 @@
-from flask import Flask, Blueprint
 from session_act.__init__ import create_app
 
 app = create_app()

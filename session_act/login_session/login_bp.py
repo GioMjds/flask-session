@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session, flash, make_response
+from flask import Blueprint, render_template, request, redirect, url_for, session, make_response
 
 login = Blueprint('login', __name__, template_folder='templates')
 
@@ -13,8 +13,6 @@ def index():
         if username and password:
             session['username'] = username
             return redirect(url_for('dashboard.index'))
-        else:
-            flash('Invalid username or password', 'error')
 
     response = make_response(render_template('login.html'))
     response.headers['Cache-Control'] = 'no-store'
